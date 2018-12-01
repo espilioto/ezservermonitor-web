@@ -1,3 +1,7 @@
+# This fork is optimized for my HP t520 thin client that's hosting my crap. 
+# If you got one, check this out :)
+
+
 [eZ Server Monitor](http://www.ezservermonitor.com) (eSM) is a script for monitoring Linux servers. It is available in [Bash](http://www.ezservermonitor.com/esm-sh/features) version and [Web](http://www.ezservermonitor.com/esm-web/features) application.
 
 # eZ Server Monitor `Web
