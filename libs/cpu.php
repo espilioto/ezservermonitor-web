@@ -12,6 +12,7 @@ $frequency  = 'N.A';
 $cache      = 'N.A';
 $bogomips   = 'N.A';
 $temp       = 'N.A';
+$power      = 'N.A';
 
 if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
 {
@@ -64,9 +65,9 @@ if ($frequency == 'N.A')
 // CPU Temp
 if ($Config->get('cpu:enable_temperature'))
 {
-    if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
+    if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(temp1)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
     {
-        if (isset($t[0]))
+        if (isset($t))
             $temp = $t[0].' °C';
     }
     else
@@ -78,6 +79,14 @@ if ($Config->get('cpu:enable_temperature'))
     }
 }
 
+// SOUL
+// POWER READING FOR THINCLIENT
+if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(power1)" | cut -c8- | sed "s/[(][^)]*[)]/()/g" | tr -d "()"', $p))
+{
+    if (isset($t))
+        $power = $p[0];
+}
+
 
 $datas = array(
     'model'      => $model,
@@ -86,6 +95,7 @@ $datas = array(
     'cache'      => $cache,
     'bogomips'   => $bogomips,
     'temp'       => $temp,
+    'power'      => $power,
 );
 
 echo json_encode($datas);

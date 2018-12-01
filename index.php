@@ -129,17 +129,15 @@ $update = $Config->checkUpdate();
                 <input type="text" class="gauge" id="load-average_1" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
-            <div class="f-left w33p">
-                <h3>5 min</h3>
-                <input type="text" class="gauge" id="load-average_5" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
-            </div>
-
-            <div class="f-left w33p">
+            <div class="f-right w33p">
                 <h3>15 min</h3>
                 <input type="text" class="gauge" id="load-average_15" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
-            <div class="cls"></div>
+            <div class="t-center">
+                <h3>5 min</h3>
+                <input type="text" class="gauge" id="load-average_5" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
+            </div>
         </div>
     </div>
 
@@ -180,6 +178,10 @@ $update = $Config->checkUpdate();
                         <tr>
                             <td>Temperature</td>
                             <td id="cpu-temp"></td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td id="cpu-power"></td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -281,41 +283,7 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-    <div class="box column-right" id="esm-swap">
-        <div class="box-header">
-            <h1>Swap</h1>
-            <ul>
-                <li><a href="#" class="reload" onclick="esm.reloadBlock('swap');"><span class="icon-cycle"></span></a></li>
-            </ul>
-        </div>
-
-        <div class="box-content">
-            <table class="firstBold">
-                <tbody>
-                    <tr>
-                        <td class="w20p">Used %</td>
-                        <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
-                    </tr>
-                    <tr>
-                        <td class="w20p">Used</td>
-                        <td id="swap-used"></td>
-                    </tr>
-                    <tr>
-                        <td class="w20p">Free</td>
-                        <td id="swap-free"></td>
-                    </tr>
-                    <tr>
-                        <td class="w20p">Total</td>
-                        <td id="swap-total"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
     <div class="cls"></div>
-
 
     <div class="t-center">
         <div class="box column-left column-33" id="esm-last_login">
