@@ -70,7 +70,6 @@ $update = $Config->checkUpdate();
 
 
 <div id="main-container">
-
     <div class="box column-left" id="esm-system">
         <div class="box-header">
             <h1>System</h1>
@@ -141,8 +140,6 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-
-
     <div class="box column-right" id="esm-cpu">
         <div class="box-header">
             <h1>CPU</h1>
@@ -189,8 +186,6 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-
-
     <div class="box column-left" id="esm-network">
         <div class="box-header">
             <h1>Network usage</h1>
@@ -214,10 +209,7 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-
     <div class="cls"></div>
-
-
 
     <div class="box" id="esm-disk">
         <div class="box-header">
@@ -247,9 +239,6 @@ $update = $Config->checkUpdate();
             </table>
         </div>
     </div>
-
-
-
 
     <div class="box column-left" id="esm-memory">
         <div class="box-header">
@@ -283,6 +272,21 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
+    <div class="box column-right" id="esm-services">
+        <div class="box-header">
+            <h1>Services status</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('services');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div class="box-content">
+            <table>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="cls"></div>
 
     <div class="t-center">
@@ -305,26 +309,6 @@ $update = $Config->checkUpdate();
             </div>
         </div>
 
-
-
-        <div class="box column-right column-33" id="esm-services">
-            <div class="box-header">
-                <h1>Services status</h1>
-                <ul>
-                    <li><a href="#" class="reload" onclick="esm.reloadBlock('services');"><span class="icon-cycle"></span></a></li>
-                </ul>
-            </div>
-
-            <div class="box-content">
-                <table>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-
-
-
-
         <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
             <div class="box-header">
                 <h1>Ping</h1>
@@ -339,16 +323,11 @@ $update = $Config->checkUpdate();
                 </table>
             </div>
         </div>
-
     </div>
-
-    
 
     <div class="cls"></div>
 
 </div>
-
-
 
 </body>
 </html>
