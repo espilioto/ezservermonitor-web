@@ -109,6 +109,10 @@ $update = $Config->checkUpdate();
                         <td>Server date & time</td>
                         <td id="system-server_date"></td>
                     </tr>
+                    <tr>
+                        <td>Server external ip</td>
+                        <td id="system-external_ip"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
