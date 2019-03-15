@@ -53,7 +53,7 @@ $update = $Config->checkUpdate();
         if ($Config->get('esm:custom_title') != '')
             echo $Config->get('esm:custom_title');
         else
-            echo Misc::getHostname().' - '.Misc::getLanIP();
+            echo Misc::getHostname().' - '.Misc::getLanIP().' - '.Misc::getExternalIp();
         ?>
     </div>
 
@@ -108,10 +108,6 @@ $update = $Config->checkUpdate();
                     <tr>
                         <td>Server date & time</td>
                         <td id="system-server_date"></td>
-                    </tr>
-                    <tr>
-                        <td>Server external ip</td>
-                        <td id="system-external_ip"></td>
                     </tr>
                 </tbody>
             </table>

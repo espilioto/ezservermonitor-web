@@ -61,11 +61,6 @@ if (!($server_date = shell_exec('/bin/date')))
     $server_date = date('Y-m-d H:i:s');
 }
 
-//get external ip
-if (!($external_ip = shell_exec('curl https://ipinfo.io/ip')))
-{
-    $external_ip = 'no idea m8';
-}
 
 $datas = array(
     'hostname'      => $hostname,
@@ -75,7 +70,6 @@ $datas = array(
     'last_boot'     => $last_boot,
     'current_users' => $current_users,
     'server_date'   => $server_date,
-    'external_ip'   => $external_ip
 );
 
 echo json_encode($datas);

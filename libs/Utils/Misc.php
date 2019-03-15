@@ -68,6 +68,19 @@ class Misc
         return $_SERVER['SERVER_ADDR'];
     }
 
+    /**
+     * Returns external IP
+     *
+     * @return string Server external IP
+     */
+    public static function getExternalIp()
+    {
+        if (!($external_ip = shell_exec('curl https://ipinfo.io/ip')))
+        {
+            $external_ip = 'no idea m8';
+        }
+        return $external_ip;
+    }
 
     /**
      * Seconds to human readable text
