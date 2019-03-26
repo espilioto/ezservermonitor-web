@@ -1,15 +1,15 @@
 var esm = {};
 
 
-esm.getSystem = function() {
+esm.getSystem = function () {
 
     var module = 'system';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
 
         esm.insertDatas($box, module, data);
 
@@ -20,15 +20,15 @@ esm.getSystem = function() {
 }
 
 
-esm.getLoad_average = function() {
+esm.getLoad_average = function () {
 
     var module = 'load_average';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content');
+        var $box = $('.box#esm-' + module + ' .box-content');
 
         esm.reconfigureGauge($('input#load-average_1', $box), data[0]);
         esm.reconfigureGauge($('input#load-average_5', $box), data[1]);
@@ -41,15 +41,15 @@ esm.getLoad_average = function() {
 }
 
 
-esm.getCpu = function() {
+esm.getCpu = function () {
 
     var module = 'cpu';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
 
         esm.insertDatas($box, module, data);
 
@@ -60,15 +60,15 @@ esm.getCpu = function() {
 }
 
 
-esm.getMemory = function() {
+esm.getMemory = function () {
 
     var module = 'memory';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
 
         esm.insertDatas($box, module, data);
 
@@ -78,8 +78,8 @@ esm.getMemory = function() {
         var $progress = $('.progressbar', $box);
 
         $progress
-            .css('width', data.percent_used+'%')
-            .html(data.percent_used+'%')
+            .css('width', data.percent_used + '%')
+            .html(data.percent_used + '%')
             .removeClass('green orange red');
 
         if (data.percent_used <= 50)
@@ -94,15 +94,15 @@ esm.getMemory = function() {
 }
 
 
-esm.getSwap = function() {
+esm.getSwap = function () {
 
     var module = 'swap';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
 
         esm.insertDatas($box, module, data);
 
@@ -110,8 +110,8 @@ esm.getSwap = function() {
         var $progress = $('.progressbar', $box);
 
         $progress
-            .css('width', data.percent_used+'%')
-            .html(data.percent_used+'%')
+            .css('width', data.percent_used + '%')
+            .html(data.percent_used + '%')
             .removeClass('green orange red');
 
         if (data.percent_used <= 50)
@@ -120,7 +120,7 @@ esm.getSwap = function() {
             $progress.addClass('orange');
         else
             $progress.addClass('red');
-    
+
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -128,19 +128,18 @@ esm.getSwap = function() {
 }
 
 
-esm.getDisk = function() {
+esm.getDisk = function () {
 
     var module = 'disk';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
         $box.empty();
 
-        for (var line in data)
-        {
+        for (var line in data) {
             var bar_class = '';
 
             if (data[line].percent_used <= 50)
@@ -154,18 +153,18 @@ esm.getDisk = function() {
             html += '<tr>';
 
             if (typeof data[line].filesystem != 'undefined')
-                html += '<td class="filesystem">'+data[line].filesystem+'</td>';
+                html += '<td class="filesystem">' + data[line].filesystem + '</td>';
 
-            html += '<td>'+data[line].mount+'</td>';
-            html += '<td><div class="progressbar-wrap"><div class="progressbar '+bar_class+'" style="width: '+data[line].percent_used+'%;">'+data[line].percent_used+'%</div></div></td>';
-            html += '<td class="t-center">'+data[line].free+'</td>';
-            html += '<td class="t-center">'+data[line].used+'</td>';
-            html += '<td class="t-center">'+data[line].total+'</td>';
+            html += '<td>' + data[line].mount + '</td>';
+            html += '<td><div class="progressbar-wrap"><div class="progressbar ' + bar_class + '" style="width: ' + data[line].percent_used + '%;">' + data[line].percent_used + '%</div></div></td>';
+            html += '<td class="t-center">' + data[line].free + '</td>';
+            html += '<td class="t-center">' + data[line].used + '</td>';
+            html += '<td class="t-center">' + data[line].total + '</td>';
             html += '</tr>';
 
             $box.append(html);
         }
-    
+
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -173,28 +172,27 @@ esm.getDisk = function() {
 }
 
 
-esm.getLast_login = function() {
+esm.getLast_login = function () {
 
     var module = 'last_login';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
         $box.empty();
 
-        for (var line in data)
-        {
+        for (var line in data) {
             var html = '';
             html += '<tr>';
-            html += '<td>'+data[line].user+'</td>';
-            html += '<td class="w50p">'+data[line].date+'</td>';
+            html += '<td>' + data[line].user + '</td>';
+            html += '<td class="w50p">' + data[line].date + '</td>';
             html += '</tr>';
 
             $box.append(html);
         }
-    
+
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -202,25 +200,24 @@ esm.getLast_login = function() {
 }
 
 
-esm.getNetwork = function() {
+esm.getNetwork = function () {
 
     var module = 'network';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
         $box.empty();
 
-        for (var line in data)
-        {
+        for (var line in data) {
             var html = '';
             html += '<tr>';
-            html += '<td>'+data[line].interface+'</td>';
-            html += '<td>'+data[line].ip+'</td>';
-            html += '<td class="t-center">'+data[line].receive+'</td>';
-            html += '<td class="t-center">'+data[line].transmit+'</td>';
+            html += '<td>' + data[line].interface + '</td>';
+            html += '<td>' + data[line].ip + '</td>';
+            html += '<td class="t-center">' + data[line].receive + '</td>';
+            html += '<td class="t-center">' + data[line].transmit + '</td>';
             html += '</tr>';
 
             $box.append(html);
@@ -233,28 +230,27 @@ esm.getNetwork = function() {
 }
 
 
-esm.getPing = function() {
+esm.getPing = function () {
 
     var module = 'ping';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
         $box.empty();
 
-        for (var line in data)
-        {
+        for (var line in data) {
             var html = '';
             html += '<tr>';
-            html += '<td>'+data[line].host+'</td>';
-            html += '<td>'+data[line].ping+' ms</td>';
+            html += '<td>' + data[line].host + '</td>';
+            html += '<td>' + data[line].ping + ' ms</td>';
             html += '</tr>';
 
             $box.append(html);
         }
-    
+
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -262,40 +258,110 @@ esm.getPing = function() {
 }
 
 
-esm.getServices = function() {
+esm.getServices = function () {
 
     var module = 'services';
-    
+
     esm.reloadBlock_spin(module);
 
-    $.get('libs/'+module+'.php', function(data) {
+    $.get('libs/' + module + '.php', function (data) {
 
-        var $box = $('.box#esm-'+module+' .box-content tbody');
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
         $box.empty();
 
-        for (var line in data)
-        {
-            var label_color  = data[line].status == 1 ? 'success' : 'error';
+        for (var line in data) {
+            var label_color = data[line].status == 1 ? 'success' : 'error';
             var label_status = data[line].status == 1 ? 'online' : 'offline';
 
             var html = '';
             html += '<tr>';
-            html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
-            html += '<td>'+data[line].name+'</td>';
-            html += '<td class="w15p">'+data[line].port+'</td>';
+            html += '<td class="w15p"><span class="label ' + label_color + '">' + label_status + '</span></td>';
+            html += '<td>' + data[line].name + '</td>';
+            html += '<td class="w15p">' + data[line].port + '</td>';
             html += '</tr>';
 
             $box.append(html);
         }
-    
+
         esm.reloadBlock_spin(module);
 
     }, 'json');
 
 }
 
+esm.getfail2banChart = function () {
 
-esm.getAll = function() {
+    var module = 'fail2banChart';
+
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/' + module + '.php', function (data) {
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
+        $box.empty();
+
+        var jailNames = [];
+        for (var jailName in data[0].jails)
+            jailNames.push(jailName);
+
+        //series must be array of arrays
+        var bans = Array();
+        for (var jail in data[0]["jails"]) {
+            bans.push(data[0]["jails"][jail]["bans"]);
+        }
+
+        new Chartist.Line('#fail2banChart', {
+            labels: data[0].jails['sshd']['days'], //this should find the largest set and use it
+            series: bans,
+        }, {
+            fullWidth: true,
+            chartPadding: {
+                top: 40,
+                right: 40
+            },
+            plugins: [
+                Chartist.plugins.ctPointLabels({
+                    textAnchor: 'middle',
+                }),
+                Chartist.plugins.legend({
+                    legendNames: jailNames
+                })
+            ]
+        });
+
+        esm.reloadBlock_spin(module);
+    }, 'json');
+}
+
+esm.getfail2banPie = function () {
+    var module = 'fail2banPie';
+
+    esm.reloadBlock_spin(module);
+
+    var labels = [];
+
+    $.get('libs/' + module + '.php', function (data) {
+        var $box = $('.box#esm-' + module + ' .box-content tbody');
+        $box.empty();
+
+        for (let i = 0; i < data.labels.length; i++) {
+            labels.push(data.labels[i] + " | " + data.series[i] + " | " + ((data.series[i] / (data.series.reduce((a, b) => a + b, 0)) * 100).toFixed(2) + "%"));
+        }
+
+        new Chartist.Pie('#fail2banPie', data, {
+            showLabel: false,
+            plugins: [
+                Chartist.plugins.legend({
+                    legendNames: labels
+                })
+            ]
+        });
+
+
+        esm.reloadBlock_spin(module);
+    }, 'json');
+}
+
+esm.getAll = function () {
     esm.getSystem();
     esm.getCpu();
     esm.getLoad_average();
@@ -306,34 +372,35 @@ esm.getAll = function() {
     esm.getNetwork();
     esm.getPing();
     esm.getServices();
+    esm.getfail2banChart();
+    esm.getfail2banPie();
 }
 
-esm.reloadBlock = function(block) {
-
+esm.reloadBlock = function (block) {
     esm.mapping[block]();
-
 }
 
-esm.reloadBlock_spin = function(block) {
-
-    var $module = $('.box#esm-'+block);
+esm.reloadBlock_spin = function (block) {
+    var $module = $('.box#esm-' + block);
 
     $('.reload', $module).toggleClass('spin disabled');
     $('.box-content', $module).toggleClass('faded');
-
 }
 
-esm.insertDatas = function($box, block, datas) {
-    for (var item in datas)
-    {
-        $('#'+block+'-'+item, $box).html(datas[item]);
+esm.insertDatas = function ($box, block, datas) {
+    for (var item in datas) {
+        $('#' + block + '-' + item, $box).html(datas[item]);
     }
 }
 
-esm.reconfigureGauge = function($gauge, newValue) {
+esm.reconfigureGauge = function ($gauge, newValue) {
     // Change colors according to the percentages
-    var colors = { green : '#7BCE6C', orange : '#E3BB80', red : '#CF6B6B' };
-    var color  = '';
+    var colors = {
+        green: '#7BCE6C',
+        orange: '#E3BB80',
+        red: '#CF6B6B'
+    };
+    var color = '';
 
     if (newValue <= 50)
         color = colors.green;
@@ -342,11 +409,11 @@ esm.reconfigureGauge = function($gauge, newValue) {
     else
         color = colors.red;
 
-    $gauge.trigger('configure', { 
+    $gauge.trigger('configure', {
         'fgColor': color,
         'inputColor': color,
         'fontWeight': 'normal',
-        'format' : function (value) {
+        'format': function (value) {
             return value + '%';
         }
     });
@@ -367,5 +434,7 @@ esm.mapping = {
     last_login: esm.getLast_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
+    fail2banChart: esm.getfail2banChart,
+    fail2banPie: esm.getfail2banPie
 };

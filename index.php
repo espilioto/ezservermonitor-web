@@ -7,16 +7,21 @@ $update = $Config->checkUpdate();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
+
+    <link rel="stylesheet" href="js/chartist/chartist.min.css" type="text/css">
+    <link rel="stylesheet" href="js/chartist/plugins/chartist-plugin-legend.css" type="text/css">
+
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="js/plugins/jquery-2.1.0.min.js" type="text/javascript"></script>
     <script src="js/plugins/jquery.knob.js" type="text/javascript"></script>
+
     <script src="js/esm.js" type="text/javascript"></script>
     <script>
     $(function(){
@@ -35,7 +40,7 @@ $update = $Config->checkUpdate();
 
         <?php if ($Config->get('esm:auto_refresh') > 0): ?>
             setInterval(function(){ esm.getAll(); }, <?php echo $Config->get('esm:auto_refresh') * 1000; ?>);
-        <?php endif; ?>
+        <?php endif;?>
     });
     </script>
 </head>
@@ -50,10 +55,11 @@ $update = $Config->checkUpdate();
 
     <div id="hostname">
         <?php
-        if ($Config->get('esm:custom_title') != '')
+        if ($Config->get('esm:custom_title') != '') {
             echo $Config->get('esm:custom_title');
-        else
-            echo Misc::getHostname().' - '.Misc::getLanIP().' - '.Misc::getExternalIp();
+        } else {
+            echo Misc::getHostname() . ' - ' . Misc::getLanIP() . ' - ' . Misc::getExternalIp();
+        }
         ?>
     </div>
 
@@ -61,7 +67,7 @@ $update = $Config->checkUpdate();
         <div id="update">
             <a href="<?php echo $update['fullpath']; ?>">New version available (<?php echo $update['availableVersion']; ?>) ! Click here to download</a>
         </div>
-    <?php endif; ?>
+    <?php endif;?>
 
     <ul>
         <li><a href="#" class="reload" onclick="esm.reloadBlock('all');"><span class="icon-cycle"></span></a></li>
@@ -180,7 +186,7 @@ $update = $Config->checkUpdate();
                             <td>Power</td>
                             <td id="cpu-power"></td>
                         </tr>
-                    <?php endif; ?>
+                    <?php endif;?>
                 </tbody>
             </table>
         </div>
@@ -225,7 +231,7 @@ $update = $Config->checkUpdate();
                     <tr>
                         <?php if ($Config->get('disk:show_filesystem')): ?>
                             <th class="w10p filesystem">Filesystem</th>
-                        <?php endif; ?>
+                        <?php endif;?>
                         <th class="w20p">Mount</th>
                         <th>Use</th>
                         <th class="w15p">Free</th>
@@ -234,7 +240,7 @@ $update = $Config->checkUpdate();
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -289,45 +295,66 @@ $update = $Config->checkUpdate();
 
     <div class="cls"></div>
 
-    <div class="t-center">
-        <div class="box column-left column-33" id="esm-last_login">
-            <div class="box-header">
-                <h1>Last login</h1>
-                <ul>
-                    <li><a href="#" class="reload" onclick="esm.reloadBlock('last_login');"><span class="icon-cycle"></span></a></li>
-                </ul>
-            </div>
-
-            <div class="box-content">
-                <?php if ($Config->get('last_login:enable') == true): ?>
-                    <table>
-                        <tbody></tbody>
-                    </table>
-                <?php else: ?>
-                    <p>Disabled</p>
-                <?php endif; ?>
-            </div>
+    <div class="box column-left column-33" id="esm-last_login">
+        <div class="box-header">
+            <h1>Last login</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('last_login');"><span class="icon-cycle"></span></a></li>
+            </ul>
         </div>
 
-        <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
-            <div class="box-header">
-                <h1>Ping</h1>
-                <ul>
-                    <li><a href="#" class="reload" onclick="esm.reloadBlock('ping');"><span class="icon-cycle"></span></a></li>
-                </ul>
-            </div>
-
-            <div class="box-content">
+        <div class="box-content">
+            <?php if ($Config->get('last_login:enable') == true): ?>
                 <table>
                     <tbody></tbody>
                 </table>
-            </div>
+            <?php else: ?>
+                <p>Disabled</p>
+            <?php endif;?>
+        </div>
+    </div>
+
+    <div class="box column-left" id="esm-ping">
+        <div class="box-header">
+            <h1>Ping</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('ping');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div class="box-content">
+            <table>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 
     <div class="cls"></div>
 
-</div>
+    <div class="box column-left column-66" id="esm-disk">
+        <div class="box-header">
+            <h1>fail2ban daily bans by jail</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('fail2banChart');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
 
+        <div id="fail2banChart" class="box-content"></div>
+    </div>
+
+    <div class="box column-right column-33" id="esm-last_login">
+        <div class="box-header">
+            <h1>fail2ban jail bans</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('fail2banPie');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div id="fail2banPie" class="box-content"></div>
+    </div>
+</div>
+<script src="js/chartist/chartist.min.js" type="text/javascript"></script>
+<script src="js/chartist/plugins/chartist-plugin-legend.js" type="text/javascript"></script>
+<script src="js/chartist/plugins/chartist-plugin-pointlabels.min.js" type="text/javascript"></script>
 </body>
 </html>
