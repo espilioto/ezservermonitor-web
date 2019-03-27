@@ -17,12 +17,14 @@ if ($Config->get('fail2ban:enable')) {
 
         // get bans per day for every jail
         foreach ($jails as $jail) {
-            $jailBans = $db->query("SELECT strftime('%d/%m', DATE(timeofban, 'unixepoch', 'localtime')) days, COUNT() bans
-                                    FROM bans
-                                    WHERE jail = '" . $jail . "'
-                                    GROUP BY strftime('%d', DATE(timeofban, 'unixepoch', 'localtime'))
-                                    ORDER BY timeofban ASC
-                                    LIMIT 14");
+            $jailBans = $db->query("SELECT * 
+                                    FROM ( SELECT timeofban, strftime('%d/%m', DATE(timeofban, 'unixepoch', 'localtime')) days, COUNT() bans
+                                           FROM bans
+                                           WHERE jail = '" . $jail . "'
+                                           GROUP BY strftime('%d', DATE(timeofban, 'unixepoch', 'localtime'))
+                                           ORDER BY timeofban DESC
+                                           LIMIT 14)
+                                    ORDER BY timeofban ASC");
 
             $bans[$jail] = array();
             $bans[$jail]['days'] = array();

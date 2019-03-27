@@ -295,7 +295,7 @@ $update = $Config->checkUpdate();
 
     <div class="cls"></div>
 
-    <div class="box column-left column-33" id="esm-last_login">
+    <div class="box column-left column-25" id="esm-last_login">
         <div class="box-header">
             <h1>Last login</h1>
             <ul>
@@ -314,7 +314,18 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-    <div class="box column-left" id="esm-ping">
+    <div class="box column-right column-25" id="esm-last_login">
+        <div class="box-header">
+            <h1>fail2ban jail bans</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('fail2banPie');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div id="fail2banPie" class="box-content"></div>
+    </div>
+
+    <div class="box column-left column-25" id="esm-ping">
         <div class="box-header">
             <h1>Ping</h1>
             <ul>
@@ -331,7 +342,7 @@ $update = $Config->checkUpdate();
 
     <div class="cls"></div>
 
-    <div class="box column-left column-66" id="esm-disk">
+    <div class="box column-left column-50" id="esm-disk">
         <div class="box-header">
             <h1>fail2ban daily bans by jail</h1>
             <ul>
@@ -340,17 +351,6 @@ $update = $Config->checkUpdate();
         </div>
 
         <div id="fail2banChart" class="box-content"></div>
-    </div>
-
-    <div class="box column-right column-33" id="esm-last_login">
-        <div class="box-header">
-            <h1>fail2ban jail bans</h1>
-            <ul>
-                <li><a href="#" class="reload" onclick="esm.reloadBlock('fail2banPie');"><span class="icon-cycle"></span></a></li>
-            </ul>
-        </div>
-
-        <div id="fail2banPie" class="box-content"></div>
     </div>
 </div>
 <script src="js/chartist/chartist.min.js" type="text/javascript"></script>
